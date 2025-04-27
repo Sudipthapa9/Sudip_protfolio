@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <style>
+    body {
+      background-color: rgb(25, 26, 25);
+      color: rgb(232, 238, 238);
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 40px;
+    }
+
+    h2 {
+      font-size: 1.5em;
+      margin-bottom: 30px;
+    }
+
+    .profiles {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .profile {
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .profile:hover {
+      transform: scale(1.05);
+    }
+
+    .avatar {
+      width: 150px;
+      height: 150px;
+      border-radius: 30px;
+      background-size: cover;
+      background-position: center;
+      background-color: #333;
+      margin-bottom: 10px;
+    }
+
+    #MrMrs {
+      background-image: url('../assets/image/whoicon.png');
+    }
+
+    #recruiter {
+      background-image: url('../assets/image/dumb.jpeg');
+    }
+
+    #stalker {
+      background-image: url('../assets/image/stalker.jpg');
+    }
+    #Girls {
+      background-image: url('../assets/image/cute-side-moment-ledus-600nw-2345448513.webp');
+    }
+
+    #boys {
+      background-image: url('../assets/image/crying-cat-meme-template-full-719a53dc.webp');
+    }
+
+    .profile p {
+      font-size: 1.1em;
+      color: #eee;
+    }
+  </style>
+  <title>Who's Watching?</title>
+</head>
+<body>
+  <div class="container">
+    <h1>Who's Watching?</h1>
+    <h2>Choose your profile</h2>
+    <div class="profiles">
+      <div class="profile" onclick="location.href='portfolio.html'">
+        <div class="avatar" id="MrMrs"></div>
+        <p>Viewer</p>
+      </div>
+
+      <div class="profile" onclick="location.href='recruiter.html'">
+        <div class="avatar" id="recruiter"></div>
+        <p>Recruiter</p>
+      </div>
+
+      <div class="profile" onclick="location.href='Girls.html'">
+        <div class="avatar" id="Girls"></div>
+        <p>Girls</p>
+      </div>
+
+      <div class="profile" onclick="location.href='stalker.html'">
+        <div class="avatar" id="stalker"></div>
+        <p>Stalker</p>
+      </div>
+
+      <div class="profile" onclick="location.href='boys.html'">
+        <div class="avatar" id="boys"></div>
+        <p>Boys</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
