@@ -1,11 +1,272 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact Me - Sudip Thapa</title>
+  <style>
+    :root {
+      --primary-color: #00bcd4;
+      --text-color: #fff;
+      --bg-color: #000;
+      --card-bg: rgba(255, 255, 255, 0.1);
+      --card-border: rgba(255, 255, 255, 0.2);
+      --hover-bg: rgba(0, 188, 212, 0.2);
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      color: var(--text-color);
+      background-color: var(--bg-color);
+      overflow-x: hidden;
+    }
+
+    .background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+                  url("../assets/image/bg.avif") no-repeat center center/cover;
+      z-index: -1;
+      animation: zoomIn 20s ease-in-out forwards;
+    }
+
+    @keyframes zoomIn {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.1); }
+    }
+
+    /* Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 5%;
+      background-color: rgba(0,0,0,0.4);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(10px);
+      opacity: 0;
+      transform: translateY(-20px);
+      animation: navbarFade 0.8s ease-out forwards;
+      animation-delay: 0.3s;
+    }
+
+    @keyframes navbarFade {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .logo {
+      height: 50px;
+      width: auto;
+      transition: transform 0.3s;
+    }
+
+    .logo:hover {
+      transform: scale(1.05);
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-links li a {
+      text-decoration: none;
+      color: var(--text-color);
+      font-weight: 500;
+      position: relative;
+      padding: 5px 0;
+      transition: color 0.3s;
+    }
+
+    .nav-links li a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      background-color: var(--primary-color);
+      left: 0;
+      bottom: 0;
+      transition: width 0.3s;
+    }
+
+    .nav-links li a:hover::after,
+    .nav-links li a:focus-visible::after {
+      width: 100%;
+    }
+
+    .nav-links li a:hover,
+    .nav-links li a:focus-visible {
+      color: var(--primary-color);
+    }
+
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 24px;
+      color: var(--text-color);
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        background-color: rgba(0,0,0,0.9);
+        position: absolute;
+        top: 80px;
+        right: 5%;
+        width: 200px;
+        padding: 20px;
+        border-radius: 10px;
+      }
+      .nav-links.active {
+        display: flex;
+      }
+      .hamburger {
+        display: block;
+      }
+    }
+
+    /* Contact Card */
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 15px;
+      text-align: center;
+      padding: 30px 20px;
+      margin: 100px auto 20px;
+      width: 90%;
+      max-width: 400px;
+      backdrop-filter: blur(10px);
+      animation: contentFadeIn 1s ease-out forwards;
+    }
+
+    .card img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 20px;
+    }
+
+    .card h2 {
+      margin: 10px 0;
+      font-size: 28px;
+    }
+
+    .card p {
+      margin: 5px 0;
+      font-size: 16px;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 10px 20px;
+      color: var(--text-color);
+      border: 1px solid var(--primary-color);
+      text-decoration: none;
+      border-radius: 8px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .btn:hover {
+      background-color: var(--primary-color);
+      color: var(--bg-color);
+    }
+
+    @keyframes contentFadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .night-note, .contact-info, footer {
+      text-align: center;
+      margin-top: 20px;
+      animation: contentFadeIn 1s ease-out forwards;
+    }
+
+    .contact-info span {
+      font-size: 24px;
+    }
+
+    footer {
+      padding: 20px;
+      font-size: 14px;
+      background-color: rgba(0,0,0,0.5);
+      backdrop-filter: blur(5px);
+      margin-top: 40px;
+    }
+  </style>
+
 </head>
+
 <body>
-    
+
+  <div class="background" role="img" aria-label="Background Image"></div>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <a href="#">
+      <img src="../assets/image/Sudip Thapa (2).jpg" alt="Sudip Thapa" class="logo">
+    </a>
+    <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu">
+      <i class="fas fa-bars"></i>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="whos.html">Home</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="resume.html">Resume</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Contact Card -->
+  <div class="card">
+    <img src="../assets/image/WhatsApp Image 2025-04-26 at 14.50.56_2ba18a40.jpg" alt="Sudip Thapa">
+    <h2>Sudip Thapa</h2>
+    <p>"Picks like a crow takes eggs — without doubt, without asking."</p>
+    <p>Not good at much, but learning coding, trading, and financing.</p>
+    <a href="https://www.facebook.com/kazit8119/" class="btn" target="_blank">Facebook Profile</a><br><br>
+    <a href="https://www.instagram.com/sudip_thapa9/" class="btn" target="_blank">Instagram</a>
+  </div>
+
+  <div class="contact-info">
+    <span>📧</span><br>
+    <a href="mailto:kazit8119@gmail.com">kazit8119@gmail.com</a>
+  </div>
+
+  <div class="contact-info">
+    <span>📞</span><br>
+    <a href="tel:+9779745351869">+977 9745351869</a>
+  </div>
+
+  <footer>
+    <p>teri bandi meri fan, catch me if you can 😎</p>
+    <a>@2023 copy right all reserved
+    </a>
+  </footer>
+
+  <!-- JS for Hamburger Menu -->
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+  </script>
+
 </body>
 </html>

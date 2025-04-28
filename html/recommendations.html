@@ -1,11 +1,398 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sudip Thapa - Skills</title>
+  <style>
+    :root {
+      --primary-color: #00bcd4;
+      --text-color: #fff;
+      --bg-color: #000;
+      --card-bg: rgba(255, 255, 255, 0.1);
+      --card-border: rgba(255, 255, 255, 0.2);
+      --hover-bg: rgba(0, 188, 212, 0.2);
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      color: var(--text-color);
+      position: relative;
+      z-index: 1;
+      overflow-x: hidden;
+      line-height: 1.6;
+      background-color: var(--bg-color);
+    }
+
+    .background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      width: 100%;
+      background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+                  url("../assets/image/bg.avif") no-repeat center center/cover;
+      z-index: -1;
+      animation: zoomIn 20s ease-in-out forwards;
+      transform: scale(1);
+    }
+
+    @keyframes zoomIn {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.1); }
+    }
+
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: rgba(0,0,0,0.4);
+      padding: 15px 5%;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      opacity: 0;
+      transform: translateY(-20px);
+      animation: navbarFade 0.8s ease-out forwards;
+      animation-delay: 0.3s;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    @keyframes navbarFade {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .logo {
+      height: 50px;
+      width: auto;
+      transition: transform 0.3s;
+    }
+
+    .logo:hover {
+      transform: scale(1.05);
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-links li a {
+      text-decoration: none;
+      color: var(--text-color);
+      font-weight: 500;
+      transition: color 0.3s;
+      position: relative;
+      padding: 5px 0;
+    }
+
+    .nav-links li a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--primary-color);
+      transition: width 0.3s;
+    }
+
+    .nav-links li a:hover::after,
+    .nav-links li a:focus-visible::after {
+      width: 100%;
+    }
+
+    .nav-links li a:hover,
+    .nav-links li a:focus-visible {
+      color: var(--primary-color);
+      outline: none;
+    }
+
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 24px;
+      color: var(--text-color);
+      cursor: pointer;
+      transition: transform 0.3s;
+      padding: 5px;
+    }
+
+    .hamburger:hover,
+    .hamburger:focus-visible {
+      transform: scale(1.1);
+      outline: none;
+      color: var(--primary-color);
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        background-color: rgba(0,0,0,0.9);
+        position: absolute;
+        top: 80px;
+        right: 5%;
+        width: 200px;
+        padding: 20px;
+        border-radius: 10px;
+        animation: fadeIn 0.3s ease-out;
+      }
+
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .hamburger {
+        display: block;
+      }
+    }
+
+    /* Main Content */
+    main {
+      padding: 20px 0;
+      opacity: 0;
+      animation: contentFadeIn 1s ease-out forwards;
+      animation-delay: 0.5s;
+    }
+
+    @keyframes contentFadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* Skills Section */
+    .skills-section {
+      padding: 60px 5%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      text-align: center;
+      position: relative;
+      display: inline-block;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .section-underline {
+      height: 4px;
+      background-color: var(--primary-color);
+      margin: 10px auto 40px;
+      border-radius: 5px;
+    }
+
+    .underline-short {
+      width: 80px;
+    }
+
+    .underline-medium {
+      width: 200px;
+    }
+
+    .underline-long {
+      width: 350px;
+    }
+
+    .card-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+    }
+
+    .skill-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 25px 30px;
+      width: 220px;
+      text-align: center;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
+      cursor: default;
+    }
+
+    .skill-card:hover {
+      transform: translateY(-8px);
+      background: var(--hover-bg);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .skill-title {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .skill-tag {
+      font-size: 1rem;
+      color: #ccc;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      margin-top: 40px;
+      opacity: 0;
+      animation: footerFadeIn 1s ease-out forwards;
+      animation-delay: 0.7s;
+    }
+
+    @keyframes footerFadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* Focus styles for accessibility */
+    *:focus-visible {
+      outline: 2px solid var(--primary-color);
+      outline-offset: 3px;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 600px) {
+      .skill-card {
+        width: 100%;
+        max-width: 280px;
+      }
+      
+      .section-title {
+        font-size: 2rem;
+      }
+    }
+  </style>
+
+  <!-- Using FontAwesome CDN for just the bars icon -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
+
 <body>
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Sudip Thapa - Skills</title>
+      <!-- (Your CSS remains same, not repeating it for brevity) -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    </head>
     
-</body>
-</html>
+    <body>
+    
+      <div class="background" role="img" aria-label="Abstract background image"></div>
+    
+      <nav class="navbar">
+        <a class="logo-link" href="#">
+          <img src="../assets/image/Sudip Thapa (2).jpg" alt="Sudip Thapa Logo" class="logo" />
+        </a>
+        <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu">
+          <i class="fas fa-bars"></i>
+        </button>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="whos.html">Home</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="resume.html">Resume</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    
+      <main>
+        <section class="skills-section">
+          <h1 class="section-title">RECOMMENDATION</h1>
+          <div class="section-underline underline-medium"></div>
+    
+          <h3 style="text-align:center;">To Whom It May Concern (and even those it doesn't),</h3>
+    
+          <p style="text-align:justify;">
+            It is with overwhelming pride, minimal modesty, and maximum excitement that I, <strong>Sudip Thapa</strong>, take this golden opportunity to recommend none other than — yes, you guessed it — <strong>Sudip Thapa</strong>.<br><br>
+    
+            Throughout my life and career, I have consistently witnessed my own unmatched commitment to excellence, creativity, and, dare I say, legendary multitasking skills. Working alongside myself has been a masterclass in efficiency, resilience, and occasional moments of pure, unfiltered genius.<br><br>
+    
+            From tight deadlines to impossible challenges, I have seen myself rise, grind, excel, and somehow make it look easy — all while maintaining an impressive sense of humor and style. I have demonstrated an ability to think critically, act decisively, and occasionally outsmart even my future self.<br><br>
+    
+            <strong>Highlights of working with me include:</strong><br>
+            - <strong>Leadership:</strong> I lead by example, inspire myself, and sometimes even surprise myself.<br>
+            - <strong>Work Ethic:</strong> I don’t just work hard — I make hard work look like a fun weekend hobby.<br>
+            - <strong>Creativity:</strong> My ideas are so fresh, they come with an expiry date.<br>
+            - <strong>Teamwork:</strong> I collaborate beautifully with myself, maintaining flawless communication, zero conflicts, and infinite understanding.<br>
+            - <strong>Problem-Solving:</strong> I approach problems like a hungry lion approaches lunch — with unstoppable focus and the roar of confidence.<br><br>
+    
+            I have often found myself marveling at my ability to adapt, learn, and innovate. If a challenge arises, I rise higher. If things go sideways, I invent a new direction. Working with <strong>Sudip Thapa</strong> (me) is not just an experience; it’s an event.<br><br>
+    
+            In every project, I bring not only skill and intelligence but also a contagious positive energy that turns even the most daunting tasks into opportunities for celebration. Honestly, the only downside to working with me is that once you experience it, every other collaboration might seem slightly less magical.<br><br>
+    
+            <strong>In Conclusion:</strong><br>
+            If I were given the chance to hire myself, work with myself, or recommend myself again, I would do it in a heartbeat — faster than my internet after switching to 5G.<br><br>
+            Because when it comes to ambition, determination, and undeniable charm, there is truly no one better than <strong>Sudip Thapa</strong>.<br><br>
+    
+            Proudly and sincerely,<br>
+            <strong>Sudip Thapa</strong><br>
+            (Founder, CEO, Employee of the Month, and Lifelong Fan of... Sudip Thapa)
+          </p>
+    
+        </section>
+      </main>
+    
+      <footer>
+        <p>&copy; 2023 Sudip Thapa. All rights reserved.</p>
+      </footer>
+    
+      <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          const hamburger = document.getElementById('hamburger');
+          const navLinks = document.getElementById('navLinks');
+          const navItems = document.querySelectorAll('.nav-links a');
+    
+          hamburger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            navLinks.classList.toggle('active');
+            hamburger.setAttribute('aria-expanded', navLinks.classList.contains('active'));
+          });
+    
+          document.addEventListener('click', (e) => {
+            if (!navLinks.contains(e.target) && !hamburger.contains(e.target)) {
+              navLinks.classList.remove('active');
+              hamburger.setAttribute('aria-expanded', 'false');
+            }
+          });
+    
+          navItems.forEach(item => {
+            item.addEventListener('click', () => {
+              navLinks.classList.remove('active');
+              hamburger.setAttribute('aria-expanded', 'false');
+            });
+          });
+        });
+      </script>
+    
+    </body>
+    </html>
+    

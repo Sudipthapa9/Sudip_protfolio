@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Stylish Registration Form</title>
+  
+  <style>
+    :root {
+      --primary-color: #d5dbe8;
+      --secondary-color: #c6cde1;
+      --accent-color: #516da3;
+      --text-color: #d8e0e8;
+      --form-bg-color: rgba(119, 137, 137, 0.9);
+      --error-color: #ff4444;
+      --success-color: #00C851;
+      --transition: all 0.3s ease;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Segoe UI', 'Poppins', sans-serif;
+      color: var(--text-color);
+      line-height: 1.6;
+      position: relative;
+      min-height: 100vh;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding-top: 90px;
+      background: linear-gradient(to right, #434343, #000000);
+    }
+
+    .background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+      url("../assets/image/bg.avif") no-repeat center center/cover;
+      z-index: -1;
+      animation: zoomIn 20s ease-in-out forwards;
+    }
+
+    @keyframes zoomIn {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.1); }
+    }
+
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: rgba(0, 0, 0, 0.4);
+      padding: 15px 5%;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+      opacity: 0;
+      transform: translateY(-20px);
+      animation: navbarFade 0.8s ease-out forwards;
+      animation-delay: 0.3s;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    @keyframes navbarFade {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .logo {
+      height: 50px;
+      width: auto;
+      border-radius: 50%;
+      transition: var(--transition);
+    }
+
+    .logo:hover {
+      transform: rotate(180deg);
+    }
+
+    .hamburger {
+      background: transparent;
+      border: none;
+      color: var(--text-color);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    .container {
+      margin-top: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .container img {
+      width: 300px;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+      transition: transform 0.5s;
+    }
+
+    .container img:hover {
+      transform: scale(1.05);
+    }
+
+    /* Button style */
+    .if-yes-button {
+      background-color: var(--accent-color);
+      color: white;
+      padding: 12px 24px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+
+    .if-yes-button:hover {
+      background-color: #3f5798;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Background -->
+  <div class="background"></div>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <a class="logo-link" href="#">
+      <img src="../assets/image/Sudip Thapa (2).jpg" alt="Sudip Thapa" class="logo" />
+    </a>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="container">
+   <video width="640" height="360" controls>
+  <source src="../assets/video/hireme.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+  </div>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    hamburger.addEventListener('click', () => {
+      alert("Hamburger menu clicked!");
+    });
+  </script>
+
+</body>
+</html>

@@ -1,11 +1,400 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sudip Thapa - Skills</title>
+  <style>
+    :root {
+      --primary-color: #00bcd4;
+      --text-color: #fff;
+      --bg-color: #000;
+      --card-bg: rgba(255, 255, 255, 0.1);
+      --card-border: rgba(255, 255, 255, 0.2);
+      --hover-bg: rgba(0, 188, 212, 0.2);
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      color: var(--text-color);
+      position: relative;
+      z-index: 1;
+      overflow-x: hidden;
+      line-height: 1.6;
+      background-color: var(--bg-color);
+    }
+
+    .background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      width: 100%;
+      background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+                  url("../assets/image/bg.avif") no-repeat center center/cover;
+      z-index: -1;
+      animation: zoomIn 20s ease-in-out forwards;
+      transform: scale(1);
+    }
+
+    @keyframes zoomIn {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.1); }
+    }
+
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: rgba(0,0,0,0.4);
+      padding: 15px 5%;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      opacity: 0;
+      transform: translateY(-20px);
+      animation: navbarFade 0.8s ease-out forwards;
+      animation-delay: 0.3s;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    @keyframes navbarFade {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .logo {
+      height: 50px;
+      width: auto;
+      transition: transform 0.3s;
+    }
+
+    .logo:hover {
+      transform: scale(1.05);
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-links li a {
+      text-decoration: none;
+      color: var(--text-color);
+      font-weight: 500;
+      transition: color 0.3s;
+      position: relative;
+      padding: 5px 0;
+    }
+
+    .nav-links li a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--primary-color);
+      transition: width 0.3s;
+    }
+
+    .nav-links li a:hover::after,
+    .nav-links li a:focus-visible::after {
+      width: 100%;
+    }
+
+    .nav-links li a:hover,
+    .nav-links li a:focus-visible {
+      color: var(--primary-color);
+      outline: none;
+    }
+
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 24px;
+      color: var(--text-color);
+      cursor: pointer;
+      transition: transform 0.3s;
+      padding: 5px;
+    }
+
+    .hamburger:hover,
+    .hamburger:focus-visible {
+      transform: scale(1.1);
+      outline: none;
+      color: var(--primary-color);
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        background-color: rgba(0,0,0,0.9);
+        position: absolute;
+        top: 80px;
+        right: 5%;
+        width: 200px;
+        padding: 20px;
+        border-radius: 10px;
+        animation: fadeIn 0.3s ease-out;
+      }
+
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .hamburger {
+        display: block;
+      }
+    }
+
+    /* Main Content */
+    main {
+      padding: 20px 0;
+      opacity: 0;
+      animation: contentFadeIn 1s ease-out forwards;
+      animation-delay: 0.5s;
+    }
+
+    @keyframes contentFadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* Skills Section */
+    .skills-section {
+      padding: 60px 5%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      text-align: center;
+      position: relative;
+      display: inline-block;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .section-underline {
+      height: 4px;
+      background-color: var(--primary-color);
+      margin: 10px auto 40px;
+      border-radius: 5px;
+    }
+
+    .underline-short {
+      width: 80px;
+    }
+
+    .underline-medium {
+      width: 200px;
+    }
+
+    .underline-long {
+      width: 350px;
+    }
+
+    .card-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+    }
+
+    .skill-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 25px 30px;
+      width: 220px;
+      text-align: center;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
+      cursor: default;
+    }
+
+    .skill-card:hover {
+      transform: translateY(-8px);
+      background: var(--hover-bg);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .skill-title {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .skill-tag {
+      font-size: 1rem;
+      color: #ccc;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      margin-top: 40px;
+      opacity: 0;
+      animation: footerFadeIn 1s ease-out forwards;
+      animation-delay: 0.7s;
+    }
+
+    @keyframes footerFadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* Focus styles for accessibility */
+    *:focus-visible {
+      outline: 2px solid var(--primary-color);
+      outline-offset: 3px;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 600px) {
+      .skill-card {
+        width: 100%;
+        max-width: 280px;
+      }
+      
+      .section-title {
+        font-size: 2rem;
+      }
+    }
+  </style>
+
+  <!-- Using FontAwesome CDN for just the bars icon -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
+
 <body>
-    
+
+  <div class="background" role="img" aria-label="Abstract background image"></div>
+
+  <nav class="navbar">
+    <a class="logo-link" href="#">
+      <img src="../assets/image/Sudip Thapa (2).jpg" alt="Sudip Thapa Logo" class="logo" />
+    </a>
+    <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu">
+      <i class="fas fa-bars"></i>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="whos.html">Home</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="resume.html">Resume</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <main>
+        <section class="skills-section">
+          <h2 class="section-title">Certifications</h2>
+          <div class="section-underline underline-short"></div>
+          <div class="card-container">
+            
+            <a href="../assets/PDF/Learn Java Basics (1).pdf" target="_blank" style="text-decoration: none; color: inherit;">
+              <div class="skill-card" tabindex="0">
+                <div class="skill-title">Java</div>
+                <div class="skill-tag">OOP</div>
+              </div>
+            </a>
+      
+            <a href="../assets/PDF/Learn C Programming.pdf" target="_blank" style="text-decoration: none; color: inherit;">
+              <div class="skill-card" tabindex="0">
+                <div class="skill-title">C</div>
+                <div class="skill-tag">Basic</div>
+              </div>
+            </a>
+      
+            <a href="../assets/PDF/Learn C++ Basics.pdf" target="_blank" style="text-decoration: none; color: inherit;">
+              <div class="skill-card" tabindex="0">
+                <div class="skill-title">C++</div>
+                <div class="skill-tag">Financial Basics</div>
+              </div>
+            </a>
+      
+            <a href="../assets/PDF/Janga Deller.pdf" arget="_blank" style="text-decoration: none; color: inherit;">
+            <div class="skill-card" tabindex="0">
+              <div class="skill-title">Market Analyst</div>
+              <div class="skill-tag">Trend Analysis</div>
+            </div>
+            </a>
+      
+          </div>
+        </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2023 Sudip Thapa. All rights reserved.</p>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const hamburger = document.getElementById('hamburger');
+      const navLinks = document.getElementById('navLinks');
+      const navItems = document.querySelectorAll('.nav-links a');
+
+      // Toggle mobile menu
+      hamburger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        navLinks.classList.toggle('active');
+        hamburger.setAttribute('aria-expanded', navLinks.classList.contains('active'));
+      });
+
+      // Close menu when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!navLinks.contains(e.target) && !hamburger.contains(e.target)) {
+          navLinks.classList.remove('active');
+          hamburger.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      // Close menu when a link is clicked
+      navItems.forEach(item => {
+        item.addEventListener('click', () => {
+          navLinks.classList.remove('active');
+          hamburger.setAttribute('aria-expanded', 'false');
+        });
+      });
+
+      // Add keyboard navigation for skill cards
+      const skillCards = document.querySelectorAll('.skill-card');
+      skillCards.forEach(card => {
+        card.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            // Add your click functionality here if needed
+          }
+        });
+      });
+    });
+  </script>
+
 </body>
 </html>
